@@ -12,7 +12,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return view('student.index', compact('students'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('course.create');
     }
 
     /**
@@ -36,7 +37,7 @@ class CourseController extends Controller
      */
     public function show(course $course)
     {
-        //
+        return view('Course.show', compact('course'));
     }
 
     /**
@@ -44,22 +45,33 @@ class CourseController extends Controller
      */
     public function edit(course $course)
     {
-        //
+        return view ('course.create');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, course $course)
+    public function update(Request $request)
     {
-        //
+         $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'syllabus' => 'required|string|unique:students',
+            'duration' => 'required|string',
+        ]);
+
+        Course::create($validated);
+
+        return redirect()->route('course.index')->with('success', 'Course created successfully');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(course $course)
+    public function destroy($id)
     {
-        //
+        $course = Course::findOrFail($id); //find the student
+        $course->delete(); //delete student
+
     }
 }
