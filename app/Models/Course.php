@@ -10,7 +10,7 @@ class Course extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'syllabus', 'duration'];
 
     public $timestamps = true;
 

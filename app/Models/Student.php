@@ -12,6 +12,8 @@ class Student extends Model
 
     protected $fillable = ['name', 'mobile', 'address'];
 
+    //protected $table = 'student';
+
     public $timestamps = true;
 
     // Student has many enrollments

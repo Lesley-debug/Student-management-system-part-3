@@ -6,19 +6,19 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Edit teacher</h1>
+  <h1>Edit Student</h1>
   
-  <form method="POST" action="{{route('teachers.update', $teacher->id)}}">
+  <form method="POST" action="{{route('students.update', $student->id)}}">
     @csrf
     @method ('PUT') <!-- tells laravel to treat this as a PUT request -->
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" value="{{ old('name', $teacher->name)}}"><br><br>
+    <input type="text" id="name" name="name" value="{{ old('name', $student->name)}}"><br><br>
 
     <label for="mobile"> mobile:</label>
-    <input type="number" id="mobile" name="mobile" value="{{old ('mobile', $teacher->mobile)}}"><br><br>
+    <input type="number" id="mobile" name="mobile" value="{{old ('mobile', $student->mobile)}}"><br><br>
 
     <label for="address">address:</label>
-    <input type="address" id="address" name="address" value="{{old ('address', $teacher->address)}}"><br><br>
+    <input type="address" id="address" name="address" value="{{old ('address', $student->address)}}"><br><br>
 
     <input type="submit" value="Submit">
    

@@ -10,7 +10,7 @@ class Teacher extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'email', 'subject'];
+    protected $fillable = ['name', 'mobile', 'address'];
 
     public $timestamps = true;
 }

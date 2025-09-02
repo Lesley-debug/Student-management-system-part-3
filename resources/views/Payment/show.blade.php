@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student</title>
+  <title>Student management system</title>
 </head>
 <body>
-  <p>All students</p>
+  <p>View a payment</p>
+
 </body>
 </html>

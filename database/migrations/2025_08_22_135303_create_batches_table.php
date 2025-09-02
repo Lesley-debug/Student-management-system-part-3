@@ -13,20 +13,16 @@ return new class extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
         $table->id();
-        $table->unsignedBigInteger('course_id');
         $table->string('name');
+        $table->unsignedBigInteger('course_id');
         $table->date('start_date');
         $table->date('end_date');
         $table->timestamps();
         $table->softDeletes();  // deleted_at
-
         $table->foreignId('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+ //Reverse the migrations.
     public function down(): void
     {
         Schema::dropIfExists('batches');

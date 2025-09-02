@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Batch;
 use App\Models\course;
 use Illuminate\Http\Request;
 
@@ -12,16 +13,16 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
-        return view('student.index', compact('students'));
+        $courses = Course::all();// fetch all courses
+        return view('courses.index', compact('courses'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('course.create');
+    { 
+        return view('courses.create');
     }
 
     /**
@@ -29,39 +30,49 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'syllabus' => 'required|string',
+            'duration' => 'required|string|unique:courses',
+        ]);
+
+        Course::create($validated);
+
+        return redirect()->route('courses.index')->with('success', 'Course edited successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(course $course)
+    public function show(course $courses)
     {
-        return view('Course.show', compact('course'));
+        return view('courses.show', compact('course'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(course $course)
+    public function edit($id)
     {
-        return view ('course.create');
+        $course = course::findOrFail($id);
+        return view('courses.edit', compact('course'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
          $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'syllabus' => 'required|string|unique:students',
-            'duration' => 'required|string',
+            'syllabus' => 'required|string',
+            'duration' => 'required|string |unique:courses','duration'. $id
         ]);
 
-        Course::create($validated);
+        $course = course::findOrFail($id);
+        $course->update($validated);
 
-        return redirect()->route('course.index')->with('success', 'Course created successfully');
+        return redirect()->route('courses.index')->with('success', 'Course updated successfully');
 
     }
 
@@ -70,8 +81,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        $course = Course::findOrFail($id); //find the student
-        $course->delete(); //delete student
+        $courses = Course::findOrFail($id); //find the student
+        $courses->delete(); //delete student
 
+        return redirect()->route('courses.index')->with('success', 'Course deleted successfully');
     }
 }

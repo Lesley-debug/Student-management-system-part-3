@@ -2,13 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\PaymentController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::Resource('Student', StudentController::class);
-Route::Resource('Teacher', TeacherController::class);
-Route::Resource('Course', CourseController::class);
-Route::Resource('Batche', BatchController::class);
-Route::Resource('Enrollment', EnrollmentController::class);
-Route::Resource('Payment', PaymentController::class);
+Route::Resource('students', StudentController::class);
+Route::Resource('teachers', TeacherController::class);
+Route::Resource('courses', CourseController::class);
+Route::Resource('batches', BatchController::class);
+Route::Resource('enrollments', EnrollmentController::class);
+Route::Resource('payments', PaymentController::class);
